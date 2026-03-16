@@ -7,453 +7,146 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --green: #1D9E75;
-    --green-light: #E1F5EE;
-    --green-mid: #5DCAA5;
-    --green-dark: #0F6E56;
-    --bg: #F7F6F2;
-    --surface: #FFFFFF;
-    --border: rgba(0,0,0,0.08);
-    --border-strong: rgba(0,0,0,0.14);
-    --text: #1A1A18;
-    --text-muted: #6B6B67;
-    --text-hint: #A0A09C;
-    --radius: 12px;
-    --radius-sm: 8px;
-    --radius-pill: 999px;
+    --green: #1D9E75; --green-light: #E1F5EE; --green-mid: #5DCAA5; --green-dark: #0F6E56;
+    --bg: #F7F6F2; --surface: #FFFFFF; --border: rgba(0,0,0,0.08); --border-strong: rgba(0,0,0,0.14);
+    --text: #1A1A18; --text-muted: #6B6B67; --text-hint: #A0A09C;
+    --radius: 12px; --radius-sm: 8px; --radius-pill: 999px;
   }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  /* TOPBAR */
-  .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 0.5px solid var(--border);
-    padding: 0 32px;
-    height: 58px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--text);
-    text-decoration: none;
-  }
-  .logo-mark {
-    width: 30px; height: 30px;
-    background: var(--green);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
+  .topbar { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); padding: 0 32px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 600; color: var(--text); text-decoration: none; cursor: pointer; }
+  .logo-mark { width: 30px; height: 30px; background: var(--green); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
   .logo-mark svg { width: 16px; height: 16px; fill: white; }
   .nav { display: flex; gap: 4px; }
-  .nav-btn {
-    padding: 7px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    color: var(--text-muted);
-    transition: all 0.15s;
-    font-family: inherit;
-  }
-  .nav-btn:hover { background: var(--bg); color: var(--text); }
-  .nav-btn.active { background: var(--bg); color: var(--text); }
-
-  /* PAGES */
+  .nav-btn { padding: 7px 16px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--text-muted); transition: all 0.15s; font-family: inherit; }
+  .nav-btn:hover, .nav-btn.active { background: var(--bg); color: var(--text); }
   .page { display: none; padding: 40px 32px; max-width: 860px; margin: 0 auto; }
   .page.active { display: block; }
 
-  /* HOME */
-  .hero {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 20px;
-    padding: 56px 48px;
-    text-align: center;
-    margin-bottom: 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 240px; height: 240px;
-    background: radial-gradient(circle, rgba(29,158,117,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--green-light);
-    color: var(--green-dark);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 5px 14px;
-    border-radius: var(--radius-pill);
-    margin-bottom: 20px;
-  }
+  /* HERO */
+  .hero { background: var(--surface); border: 0.5px solid var(--border); border-radius: 20px; padding: 56px 48px; text-align: center; margin-bottom: 28px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(29,158,117,0.08) 0%, transparent 70%); pointer-events: none; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-light); color: var(--green-dark); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: var(--radius-pill); margin-bottom: 20px; }
   .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
-  .hero h1 {
-    font-size: 36px;
-    font-weight: 600;
-    line-height: 1.25;
-    margin-bottom: 14px;
-    color: var(--text);
-  }
-  .hero p {
-    font-size: 16px;
-    color: var(--text-muted);
-    max-width: 500px;
-    margin: 0 auto 32px;
-  }
-  .btn-primary {
-    background: var(--green);
-    color: white;
-    border: none;
-    padding: 13px 28px;
-    border-radius: var(--radius-sm);
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.15s;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
+  .hero h1 { font-size: 36px; font-weight: 600; line-height: 1.25; margin-bottom: 14px; }
+  .hero p { font-size: 16px; color: var(--text-muted); max-width: 500px; margin: 0 auto 32px; }
+  .btn-primary { background: var(--green); color: white; border: none; padding: 13px 28px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
   .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
 
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .step {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px 20px;
-    transition: border-color 0.15s;
-  }
+  /* STEPS */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 36px; }
+  .step { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 24px 20px; transition: border-color 0.15s; }
   .step:hover { border-color: var(--border-strong); }
-  .step-num {
-    width: 32px; height: 32px;
-    background: var(--green-light);
-    color: var(--green-dark);
-    border-radius: var(--radius-sm);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 14px;
-  }
+  .step-num { width: 32px; height: 32px; background: var(--green-light); color: var(--green-dark); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; margin-bottom: 14px; }
   .step h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
   .step p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
 
-  /* PRICING teaser */
-  .pricing-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-top: 28px;
-  }
-  .price-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 22px 20px;
-    text-align: center;
-  }
+  /* PRICING */
+  .pricing-title { font-size: 20px; font-weight: 600; text-align: center; margin-bottom: 6px; }
+  .pricing-sub { font-size: 14px; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
+  .pricing-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .price-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 28px 22px; display: flex; flex-direction: column; gap: 16px; transition: border-color 0.15s, transform 0.15s; }
+  .price-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
   .price-card.featured { border: 2px solid var(--green); }
-  .price-name { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
-  .price-amount { font-size: 28px; font-weight: 600; color: var(--text); }
+  .price-badge { display: inline-block; background: var(--green-light); color: var(--green-dark); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: var(--radius-pill); text-transform: uppercase; letter-spacing: 0.04em; }
+  .price-name { font-size: 16px; font-weight: 600; }
+  .price-amount { font-size: 32px; font-weight: 600; line-height: 1; }
   .price-amount span { font-size: 14px; font-weight: 400; color: var(--text-muted); }
-  .price-desc { font-size: 12px; color: var(--text-hint); margin-top: 6px; }
-  .price-badge {
-    display: inline-block;
-    background: var(--green-light);
-    color: var(--green-dark);
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-    margin-bottom: 10px;
-  }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .price-features li { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+  .price-features li::before { content: ''; width: 16px; height: 16px; flex-shrink: 0; background: var(--green-light) url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%230F6E56' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center; border-radius: 50%; }
+  .buy-btn { display: block; width: 100%; padding: 11px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; text-align: center; text-decoration: none; cursor: pointer; font-family: inherit; transition: all 0.15s; border: none; }
+  .buy-btn-outline { background: transparent; border: 0.5px solid var(--border-strong); color: var(--text); }
+  .buy-btn-outline:hover { background: var(--bg); }
+  .buy-btn-filled { background: var(--green); color: white; }
+  .buy-btn-filled:hover { background: var(--green-dark); }
 
-  /* FORM PAGE */
-  .form-wrap {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 20px;
-    padding: 36px;
-  }
+  /* FORM */
+  .form-wrap { background: var(--surface); border: 0.5px solid var(--border); border-radius: 20px; padding: 36px; }
   .form-title { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
   .form-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
   .form-row { margin-bottom: 20px; }
-  .form-row label {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-muted);
-    margin-bottom: 7px;
-  }
-  .form-row input,
-  .form-row textarea,
-  .form-row select {
-    width: 100%;
-    padding: 10px 14px;
-    border: 0.5px solid var(--border-strong);
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    background: var(--surface);
-    color: var(--text);
-    font-family: inherit;
-    transition: border-color 0.15s;
-    outline: none;
-  }
-  .form-row input:focus,
-  .form-row textarea:focus { border-color: var(--green); }
+  .form-row label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 7px; }
+  .form-row input, .form-row textarea, .form-row select { width: 100%; padding: 10px 14px; border: 0.5px solid var(--border-strong); border-radius: var(--radius-sm); font-size: 14px; background: var(--surface); color: var(--text); font-family: inherit; transition: border-color 0.15s; outline: none; }
+  .form-row input:focus, .form-row textarea:focus { border-color: var(--green); }
   .form-row textarea { resize: vertical; min-height: 90px; }
-
   .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .tag {
-    padding: 6px 14px;
-    border-radius: var(--radius-pill);
-    font-size: 13px;
-    border: 0.5px solid var(--border-strong);
-    cursor: pointer;
-    background: var(--surface);
-    color: var(--text-muted);
-    transition: all 0.15s;
-    font-family: inherit;
-  }
+  .tag { padding: 6px 14px; border-radius: var(--radius-pill); font-size: 13px; border: 0.5px solid var(--border-strong); cursor: pointer; background: var(--surface); color: var(--text-muted); transition: all 0.15s; font-family: inherit; }
   .tag.on { background: var(--green-light); color: var(--green-dark); border-color: var(--green-mid); font-weight: 500; }
-  .tag:hover:not(.on) { border-color: var(--green-mid); }
-
-  .submit-btn {
-    width: 100%;
-    background: var(--green);
-    color: white;
-    border: none;
-    padding: 13px;
-    border-radius: var(--radius-sm);
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-    margin-top: 10px;
-    transition: all 0.15s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
+  .submit-btn { width: 100%; background: var(--green); color: white; border: none; padding: 13px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; margin-top: 10px; transition: all 0.15s; }
   .submit-btn:hover { background: var(--green-dark); }
 
-  /* RESULTS PAGE */
-  .results-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
+  /* RESULTS */
+  .results-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
   .results-top h2 { font-size: 20px; font-weight: 600; }
-  .count-badge {
-    background: var(--green-light);
-    color: var(--green-dark);
-    font-size: 13px;
-    font-weight: 500;
-    padding: 4px 14px;
-    border-radius: var(--radius-pill);
-  }
-  .send-all-btn {
-    background: var(--green);
-    color: white;
-    border: none;
-    padding: 9px 20px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.15s;
-  }
+  .count-badge { background: var(--green-light); color: var(--green-dark); font-size: 13px; font-weight: 500; padding: 4px 14px; border-radius: var(--radius-pill); }
+  .send-all-btn { background: var(--green); color: white; border: none; padding: 9px 20px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all 0.15s; }
   .send-all-btn:hover { background: var(--green-dark); }
-
   .email-list { display: flex; flex-direction: column; gap: 10px; }
-  .email-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    transition: border-color 0.15s;
-  }
+  .email-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: border-color 0.15s; }
   .email-card:hover { border-color: var(--border-strong); }
-  .email-card.sent { opacity: 0.65; }
+  .email-card.sent { opacity: 0.6; }
   .email-left { display: flex; align-items: center; gap: 14px; }
-  .club-avatar {
-    width: 40px; height: 40px;
-    border-radius: var(--radius-sm);
-    background: var(--green-light);
-    color: var(--green-dark);
-    font-size: 13px;
-    font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
+  .club-avatar { width: 40px; height: 40px; border-radius: var(--radius-sm); background: var(--green-light); color: var(--green-dark); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .club-name { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
   .club-email { font-size: 12px; color: var(--text-muted); font-family: 'DM Mono', monospace; }
   .email-actions { display: flex; gap: 8px; flex-shrink: 0; }
-  .btn-ghost {
-    background: transparent;
-    border: 0.5px solid var(--border-strong);
-    color: var(--text-muted);
-    padding: 7px 14px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.15s;
-  }
+  .btn-ghost { background: transparent; border: 0.5px solid var(--border-strong); color: var(--text-muted); padding: 7px 14px; border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; font-family: inherit; transition: all 0.15s; }
   .btn-ghost:hover { border-color: var(--green-mid); color: var(--text); }
-  .btn-send {
-    background: var(--green);
-    color: white;
-    border: none;
-    padding: 7px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.15s;
-  }
+  .btn-send { background: var(--green); color: white; border: none; padding: 7px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all 0.15s; }
   .btn-send:hover { background: var(--green-dark); }
-  .btn-sent {
-    background: var(--bg);
-    color: var(--text-muted);
-    border: none;
-    padding: 7px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    cursor: default;
-    font-family: inherit;
-  }
+  .btn-sent { background: var(--bg); color: var(--text-muted); border: none; padding: 7px 16px; border-radius: var(--radius-sm); font-size: 13px; cursor: default; font-family: inherit; }
 
   /* DASHBOARD */
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 28px;
-  }
-  .metric {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 18px;
-  }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+  .metric { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 20px 18px; }
   .metric-label { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
-  .metric-val { font-size: 26px; font-weight: 600; color: var(--text); }
+  .metric-val { font-size: 26px; font-weight: 600; }
   .metric-trend { font-size: 12px; color: var(--green); margin-top: 4px; }
-
-  .section-title { font-size: 14px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+  .section-title { font-size: 13px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
   .order-list { display: flex; flex-direction: column; gap: 10px; }
-  .order-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  .order-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
   .order-name { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
   .order-detail { font-size: 12px; color: var(--text-muted); }
   .order-right { display: flex; align-items: center; gap: 14px; }
-  .status {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 4px 12px;
-    border-radius: var(--radius-pill);
-  }
+  .status { font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: var(--radius-pill); }
   .status.done { background: var(--green-light); color: var(--green-dark); }
   .status.progress { background: #FFF3CD; color: #7A5400; }
-  .order-price { font-size: 15px; font-weight: 600; color: var(--text); }
+  .order-price { font-size: 15px; font-weight: 600; }
 
-  /* MODAL PREVIEW */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; align-items: center; justify-content: center; padding: 24px; }
   .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--surface);
-    border-radius: 16px;
-    padding: 28px;
-    max-width: 540px;
-    width: 100%;
-    border: 0.5px solid var(--border);
-  }
+  .modal { background: var(--surface); border-radius: 16px; padding: 28px; max-width: 540px; width: 100%; border: 0.5px solid var(--border); }
   .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
   .modal-title { font-size: 16px; font-weight: 600; }
-  .modal-close {
-    background: none; border: none; cursor: pointer;
-    color: var(--text-muted); font-size: 20px; line-height: 1;
-  }
+  .modal-close { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 22px; line-height: 1; }
   .modal-field { margin-bottom: 14px; }
-  .modal-field-label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 5px; }
-  .modal-field-val { font-size: 14px; color: var(--text); background: var(--bg); padding: 10px 14px; border-radius: var(--radius-sm); font-family: 'DM Mono', monospace; font-size: 13px; line-height: 1.6; }
+  .modal-field-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; }
+  .modal-field-val { font-size: 13px; color: var(--text); background: var(--bg); padding: 10px 14px; border-radius: var(--radius-sm); font-family: 'DM Mono', monospace; line-height: 1.6; white-space: pre-wrap; }
 
   @media (max-width: 640px) {
     .topbar { padding: 0 16px; }
-    .nav-btn span { display: none; }
     .page { padding: 24px 16px; }
     .hero { padding: 36px 20px; }
-    .hero h1 { font-size: 26px; }
-    .steps, .pricing-row, .metrics { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 24px; }
+    .steps, .pricing-row, .metrics { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <a class="logo" href="#" onclick="showPage('home')">
+  <div class="logo" onclick="showPage('home')">
     <div class="logo-mark">
       <svg viewBox="0 0 16 16"><path d="M2 2h5v5H2zm7 0h5v5H9zM2 9h5v5H2zm9 2a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg>
     </div>
     MailBlast Pro
-  </a>
+  </div>
   <nav class="nav">
     <button class="nav-btn active" onclick="showPage('home')">Accueil</button>
-    <button class="nav-btn" onclick="showPage('order')">Nouvelle commande</button>
+    <button class="nav-btn" onclick="showPage('order')">Commander</button>
     <button class="nav-btn" onclick="showPage('results')">Résultats</button>
     <button class="nav-btn" onclick="showPage('dashboard')">Dashboard</button>
   </nav>
@@ -464,7 +157,7 @@
   <div class="hero">
     <div class="hero-badge">Propulsé par l'IA</div>
     <h1>On envoie vos emails<br>à votre place</h1>
-    <p>Dites-nous ce que vous cherchez. On trouve les contacts, on rédige les emails et on envoie — tout ça en moins de 5 minutes.</p>
+    <p>Dites-nous ce que vous cherchez. On trouve les contacts, on rédige les emails et on envoie — tout ça en moins de 24h.</p>
     <button class="btn-primary" onclick="showPage('order')">
       Lancer une campagne
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -472,39 +165,46 @@
   </div>
 
   <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <h3>Décrivez votre besoin</h3>
-      <p>Club de foot, recruteur, investisseur... Dites-nous qui vous cherchez et où.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <h3>On trouve les contacts</h3>
-      <p>L'IA recherche les emails officiels des organisations ciblées pour vous.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <h3>On envoie pour vous</h3>
-      <p>Emails personnalisés, rédigés et envoyés depuis votre boîte mail.</p>
-    </div>
+    <div class="step"><div class="step-num">1</div><h3>Décrivez votre besoin</h3><p>Club de foot, recruteur, investisseur... Dites-nous qui vous cherchez et où.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>On trouve les contacts</h3><p>L'IA recherche les emails officiels des organisations ciblées pour vous.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>On envoie pour vous</h3><p>Emails personnalisés, rédigés et envoyés depuis votre boîte mail en moins de 24h.</p></div>
   </div>
+
+  <div class="pricing-title">Choisissez votre formule</div>
+  <div class="pricing-sub">Paiement sécurisé via Gumroad · Satisfaction garantie · Résiliable à tout moment</div>
 
   <div class="pricing-row">
     <div class="price-card">
-      <div class="price-name">Starter</div>
-      <div class="price-amount">9€ <span>/ campagne</span></div>
-      <div class="price-desc">Jusqu'à 5 emails</div>
+      <div><div class="price-name">Starter</div><div class="price-amount">9€ <span>une fois</span></div></div>
+      <ul class="price-features">
+        <li>Jusqu'à 5 emails envoyés</li>
+        <li>Contacts trouvés par l'IA</li>
+        <li>Rédaction personnalisée</li>
+        <li>Livraison sous 24h</li>
+      </ul>
+      <a href="https://bmh212.gumroad.com/l/tebxfu" target="_blank" class="buy-btn buy-btn-outline">Commencer →</a>
     </div>
     <div class="price-card featured">
-      <div class="price-badge">Populaire</div>
-      <div class="price-name">Pro</div>
-      <div class="price-amount">29€ <span>/ campagne</span></div>
-      <div class="price-desc">Jusqu'à 20 emails + suivi</div>
+      <div><div class="price-badge">Le plus populaire</div><div class="price-name">Pro</div><div class="price-amount">29€ <span>une fois</span></div></div>
+      <ul class="price-features">
+        <li>Jusqu'à 20 emails envoyés</li>
+        <li>Contacts trouvés par l'IA</li>
+        <li>Rédaction personnalisée</li>
+        <li>Suivi des réponses 7 jours</li>
+        <li>Livraison sous 24h</li>
+      </ul>
+      <a href="https://bmh212.gumroad.com/l/orxgo" target="_blank" class="buy-btn buy-btn-filled">Choisir Pro →</a>
     </div>
     <div class="price-card">
-      <div class="price-name">Illimité</div>
-      <div class="price-amount">49€ <span>/ mois</span></div>
-      <div class="price-desc">Campagnes illimitées</div>
+      <div><div class="price-name">Illimité</div><div class="price-amount">49€ <span>/ mois</span></div></div>
+      <ul class="price-features">
+        <li>Campagnes illimitées</li>
+        <li>Emails illimités</li>
+        <li>Suivi des réponses inclus</li>
+        <li>Support prioritaire</li>
+        <li>Résiliable à tout moment</li>
+      </ul>
+      <a href="https://bmh212.gumroad.com/l/fvgtrj" target="_blank" class="buy-btn buy-btn-outline">S'abonner →</a>
     </div>
   </div>
 </div>
@@ -513,16 +213,9 @@
 <div class="page" id="page-order">
   <div class="form-wrap">
     <div class="form-title">Nouvelle campagne</div>
-    <div class="form-sub">Remplissez ce formulaire — on s'occupe du reste en moins de 5 minutes.</div>
-
-    <div class="form-row">
-      <label>Votre nom complet</label>
-      <input type="text" placeholder="ex: Mehdi Ben Moha" />
-    </div>
-    <div class="form-row">
-      <label>Votre email</label>
-      <input type="email" placeholder="ex: mehdi@gmail.com" />
-    </div>
+    <div class="form-sub">Remplissez ce formulaire — on s'occupe du reste en moins de 24h.</div>
+    <div class="form-row"><label>Votre nom complet</label><input type="text" placeholder="ex: Lucas" /></div>
+    <div class="form-row"><label>Votre email</label><input type="email" placeholder="ex: lucas@gmail.com" /></div>
     <div class="form-row">
       <label>Votre objectif</label>
       <div class="tags" id="goal">
@@ -533,10 +226,7 @@
         <button class="tag" onclick="pick(this,'goal')">Autre</button>
       </div>
     </div>
-    <div class="form-row">
-      <label>Secteur / domaine ciblé</label>
-      <input type="text" placeholder="ex: Clubs de football, BTP, Startups Tech..." />
-    </div>
+    <div class="form-row"><label>Secteur / domaine ciblé</label><input type="text" placeholder="ex: Clubs de football, BTP, Startups Tech..." /></div>
     <div class="form-row">
       <label>Zones géographiques</label>
       <div class="tags" id="geo">
@@ -548,214 +238,66 @@
         <button class="tag" onclick="toggleGeo(this)">Europe</button>
       </div>
     </div>
+    <div class="form-row"><label>Votre profil (expérience, points forts, disponibilité...)</label><textarea placeholder="ex: Milieu de terrain français, 5 ans d'expérience, disponible immédiatement..."></textarea></div>
+    <div class="form-row"><label>CV ou portfolio (PDF, Word...)</label><input type="file" accept=".pdf,.doc,.docx" /></div>
     <div class="form-row">
-      <label>Votre profil (expérience, points forts, disponibilité...)</label>
-      <textarea placeholder="ex: Milieu de terrain français, 5 ans d'expérience en N2, polyvalent, disponible immédiatement..."></textarea>
-    </div>
-    <div class="form-row">
-      <label>CV ou portfolio (PDF, Word...)</label>
-      <input type="file" accept=".pdf,.doc,.docx" />
-    </div>
-    <div class="form-row">
-      <label>Formule</label>
+      <label>Formule choisie</label>
       <select>
         <option>Starter — 9€ (jusqu'à 5 emails)</option>
         <option selected>Pro — 29€ (jusqu'à 20 emails + suivi)</option>
         <option>Illimité — 49€/mois (campagnes illimitées)</option>
       </select>
     </div>
-    <button class="submit-btn" onclick="showPage('results')">
-      Lancer la campagne →
-    </button>
+    <button class="submit-btn" onclick="showPage('results')">Lancer la campagne →</button>
   </div>
 </div>
 
 <!-- RESULTS -->
 <div class="page" id="page-results">
   <div class="results-top">
-    <div>
-      <h2>Contacts trouvés</h2>
-    </div>
+    <h2>Contacts trouvés</h2>
     <div style="display:flex;align-items:center;gap:12px;">
       <span class="count-badge">7 clubs identifiés</span>
       <button class="send-all-btn" onclick="sendAll()">Tout envoyer</button>
     </div>
   </div>
-
-  <div class="email-list" id="email-list">
-    <div class="email-card sent">
-      <div class="email-left">
-        <div class="club-avatar">AW</div>
-        <div>
-          <div class="club-name">Al Wasl FC</div>
-          <div class="club-email">info@alwaslsc.ae · Dubai</div>
-        </div>
-      </div>
-      <div class="email-actions">
-        <button class="btn-ghost" onclick="openPreview('Al Wasl FC','info@alwaslsc.ae')">Aperçu</button>
-        <button class="btn-sent">✓ Envoyé</button>
-      </div>
-    </div>
-    <div class="email-card sent">
-      <div class="email-left">
-        <div class="club-avatar">AN</div>
-        <div>
-          <div class="club-name">Al Nasr FC</div>
-          <div class="club-email">info@alnasr-fc.ae · Dubai</div>
-        </div>
-      </div>
-      <div class="email-actions">
-        <button class="btn-ghost" onclick="openPreview('Al Nasr FC','info@alnasr-fc.ae')">Aperçu</button>
-        <button class="btn-sent">✓ Envoyé</button>
-      </div>
-    </div>
-    <div class="email-card sent">
-      <div class="email-left">
-        <div class="club-avatar">SA</div>
-        <div>
-          <div class="club-name">Shabab Al-Ahli Dubai FC</div>
-          <div class="club-email">info@shababafc.ae · Dubai</div>
-        </div>
-      </div>
-      <div class="email-actions">
-        <button class="btn-ghost" onclick="openPreview('Shabab Al-Ahli','info@shababafc.ae')">Aperçu</button>
-        <button class="btn-sent">✓ Envoyé</button>
-      </div>
-    </div>
-    <div class="email-card">
-      <div class="email-left">
-        <div class="club-avatar">AA</div>
-        <div>
-          <div class="club-name">Al Ain FC</div>
-          <div class="club-email">info@alainclub.ae · Al Ain</div>
-        </div>
-      </div>
-      <div class="email-actions">
-        <button class="btn-ghost" onclick="openPreview('Al Ain FC','info@alainclub.ae')">Aperçu</button>
-        <button class="btn-send" onclick="markSent(this)">Envoyer</button>
-      </div>
-    </div>
-    <div class="email-card">
-      <div class="email-left">
-        <div class="club-avatar">SH</div>
-        <div>
-          <div class="club-name">Sharjah FC</div>
-          <div class="club-email">info@sharjahclub.ae · Sharjah</div>
-        </div>
-      </div>
-      <div class="email-actions">
-        <button class="btn-ghost" onclick="openPreview('Sharjah FC','info@sharjahclub.ae')">Aperçu</button>
-        <button class="btn-send" onclick="markSent(this)">Envoyer</button>
-      </div>
-    </div>
-    <div class="email-card">
-      <div class="email-left">
-        <div class="club-avatar">WH</div>
-        <div>
-          <div class="club-name">Al Wahda FC</div>
-          <div class="club-email">marketing@alwahdafootballclub.ae · Abu Dhabi</div>
-        </div>
-      </div>
-      <div class="email-actions">
-        <button class="btn-ghost" onclick="openPreview('Al Wahda FC','marketing@alwahdafootballclub.ae')">Aperçu</button>
-        <button class="btn-send" onclick="markSent(this)">Envoyer</button>
-      </div>
-    </div>
-    <div class="email-card">
-      <div class="email-left">
-        <div class="club-avatar">JZ</div>
-        <div>
-          <div class="club-name">Al Jazira FC</div>
-          <div class="club-email">info@aljaziraclub.ae · Abu Dhabi</div>
-        </div>
-      </div>
-      <div class="email-actions">
-        <button class="btn-ghost" onclick="openPreview('Al Jazira FC','info@aljaziraclub.ae')">Aperçu</button>
-        <button class="btn-send" onclick="markSent(this)">Envoyer</button>
-      </div>
-    </div>
+  <div class="email-list">
+    <div class="email-card sent"><div class="email-left"><div class="club-avatar">AW</div><div><div class="club-name">Al Wasl FC</div><div class="club-email">info@alwaslsc.ae · Dubai</div></div></div><div class="email-actions"><button class="btn-ghost" onclick="openPreview('Al Wasl FC','info@alwaslsc.ae')">Aperçu</button><button class="btn-sent">✓ Envoyé</button></div></div>
+    <div class="email-card sent"><div class="email-left"><div class="club-avatar">AN</div><div><div class="club-name">Al Nasr FC</div><div class="club-email">info@alnasr-fc.ae · Dubai</div></div></div><div class="email-actions"><button class="btn-ghost" onclick="openPreview('Al Nasr FC','info@alnasr-fc.ae')">Aperçu</button><button class="btn-sent">✓ Envoyé</button></div></div>
+    <div class="email-card sent"><div class="email-left"><div class="club-avatar">SA</div><div><div class="club-name">Shabab Al-Ahli Dubai FC</div><div class="club-email">info@shababafc.ae · Dubai</div></div></div><div class="email-actions"><button class="btn-ghost" onclick="openPreview('Shabab Al-Ahli','info@shababafc.ae')">Aperçu</button><button class="btn-sent">✓ Envoyé</button></div></div>
+    <div class="email-card"><div class="email-left"><div class="club-avatar">AA</div><div><div class="club-name">Al Ain FC</div><div class="club-email">info@alainclub.ae · Al Ain</div></div></div><div class="email-actions"><button class="btn-ghost" onclick="openPreview('Al Ain FC','info@alainclub.ae')">Aperçu</button><button class="btn-send" onclick="markSent(this)">Envoyer</button></div></div>
+    <div class="email-card"><div class="email-left"><div class="club-avatar">SH</div><div><div class="club-name">Sharjah FC</div><div class="club-email">info@sharjahclub.ae · Sharjah</div></div></div><div class="email-actions"><button class="btn-ghost" onclick="openPreview('Sharjah FC','info@sharjahclub.ae')">Aperçu</button><button class="btn-send" onclick="markSent(this)">Envoyer</button></div></div>
+    <div class="email-card"><div class="email-left"><div class="club-avatar">WH</div><div><div class="club-name">Al Wahda FC</div><div class="club-email">marketing@alwahdafootballclub.ae · Abu Dhabi</div></div></div><div class="email-actions"><button class="btn-ghost" onclick="openPreview('Al Wahda FC','marketing@alwahdafootballclub.ae')">Aperçu</button><button class="btn-send" onclick="markSent(this)">Envoyer</button></div></div>
+    <div class="email-card"><div class="email-left"><div class="club-avatar">JZ</div><div><div class="club-name">Al Jazira FC</div><div class="club-email">info@aljaziraclub.ae · Abu Dhabi</div></div></div><div class="email-actions"><button class="btn-ghost" onclick="openPreview('Al Jazira FC','info@aljaziraclub.ae')">Aperçu</button><button class="btn-send" onclick="markSent(this)">Envoyer</button></div></div>
   </div>
 </div>
 
 <!-- DASHBOARD -->
 <div class="page" id="page-dashboard">
   <div class="metrics">
-    <div class="metric">
-      <div class="metric-label">Campagnes</div>
-      <div class="metric-val">3</div>
-      <div class="metric-trend">+1 ce mois</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">Emails envoyés</div>
-      <div class="metric-val">24</div>
-      <div class="metric-trend">7 aujourd'hui</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">Réponses</div>
-      <div class="metric-val">4</div>
-      <div class="metric-trend">Taux 16%</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">Revenus</div>
-      <div class="metric-val">270€</div>
-      <div class="metric-trend">3 clients</div>
-    </div>
+    <div class="metric"><div class="metric-label">Campagnes</div><div class="metric-val">3</div><div class="metric-trend">+1 ce mois</div></div>
+    <div class="metric"><div class="metric-label">Emails envoyés</div><div class="metric-val">24</div><div class="metric-trend">7 aujourd'hui</div></div>
+    <div class="metric"><div class="metric-label">Réponses</div><div class="metric-val">4</div><div class="metric-trend">Taux 16%</div></div>
+    <div class="metric"><div class="metric-label">Revenus</div><div class="metric-val">270€</div><div class="metric-trend">3 clients</div></div>
   </div>
-
   <div class="section-title">Commandes récentes</div>
   <div class="order-list">
-    <div class="order-card">
-      <div>
-        <div class="order-name">Mehdi B. — Clubs de foot Dubai</div>
-        <div class="order-detail">7 emails · Milieu de terrain · Français</div>
-      </div>
-      <div class="order-right">
-        <span class="status done">Terminé</span>
-        <span class="order-price">29€</span>
-      </div>
-    </div>
-    <div class="order-card">
-      <div>
-        <div class="order-name">Karim L. — BTP Île-de-France</div>
-        <div class="order-detail">12 emails · Conducteur de travaux</div>
-      </div>
-      <div class="order-right">
-        <span class="status done">Terminé</span>
-        <span class="order-price">49€</span>
-      </div>
-    </div>
-    <div class="order-card">
-      <div>
-        <div class="order-name">Sara M. — Startups Tech Paris</div>
-        <div class="order-detail">18 emails · Marketing Manager</div>
-      </div>
-      <div class="order-right">
-        <span class="status progress">En cours</span>
-        <span class="order-price">49€</span>
-      </div>
-    </div>
+    <div class="order-card"><div><div class="order-name">Lucas — Clubs de foot Dubai</div><div class="order-detail">7 emails · Milieu de terrain · Français</div></div><div class="order-right"><span class="status done">Terminé</span><span class="order-price">29€</span></div></div>
+    <div class="order-card"><div><div class="order-name">Karim L. — BTP Île-de-France</div><div class="order-detail">12 emails · Conducteur de travaux</div></div><div class="order-right"><span class="status done">Terminé</span><span class="order-price">49€</span></div></div>
+    <div class="order-card"><div><div class="order-name">Sara M. — Startups Tech Paris</div><div class="order-detail">18 emails · Marketing Manager</div></div><div class="order-right"><span class="status progress">En cours</span><span class="order-price">49€</span></div></div>
   </div>
 </div>
 
-<!-- MODAL PREVIEW -->
+<!-- MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-title" id="modal-title">Aperçu de l'email</div>
+      <div class="modal-title" id="modal-title">Aperçu</div>
       <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">×</button>
     </div>
-    <div class="modal-field">
-      <div class="modal-field-label">À</div>
-      <div class="modal-field-val" id="modal-to"></div>
-    </div>
-    <div class="modal-field">
-      <div class="modal-field-label">Objet</div>
-      <div class="modal-field-val">Player Application – French Professional Midfielder | Mehdi Ben Moha</div>
-    </div>
-    <div class="modal-field">
-      <div class="modal-field-label">Message</div>
-      <div class="modal-field-val" id="modal-body"></div>
-    </div>
+    <div class="modal-field"><div class="modal-field-label">À</div><div class="modal-field-val" id="modal-to"></div></div>
+    <div class="modal-field"><div class="modal-field-label">Objet</div><div class="modal-field-val">Player Application – French Professional Midfielder | Lucas</div></div>
+    <div class="modal-field"><div class="modal-field-label">Message</div><div class="modal-field-val" id="modal-body"></div></div>
   </div>
 </div>
 
@@ -764,35 +306,20 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  const pages = ['home','order','results','dashboard'];
-  document.querySelectorAll('.nav-btn')[pages.indexOf(id)].classList.add('active');
+  ['home','order','results','dashboard'].forEach((p,i) => { if(p===id) document.querySelectorAll('.nav-btn')[i].classList.add('active'); });
   window.scrollTo(0,0);
 }
-function pick(el, group) {
-  document.querySelectorAll('#' + group + ' .tag').forEach(t => t.classList.remove('on'));
-  el.classList.add('on');
-}
+function pick(el, group) { document.querySelectorAll('#'+group+' .tag').forEach(t=>t.classList.remove('on')); el.classList.add('on'); }
 function toggleGeo(el) { el.classList.toggle('on'); }
-function markSent(btn) {
-  btn.outerHTML = '<button class="btn-sent">✓ Envoyé</button>';
-  btn.closest('.email-card').classList.add('sent');
-}
-function sendAll() {
-  document.querySelectorAll('.btn-send').forEach(btn => {
-    btn.outerHTML = '<button class="btn-sent">✓ Envoyé</button>';
-  });
-  document.querySelectorAll('.email-card').forEach(c => c.classList.add('sent'));
-}
+function markSent(btn) { btn.closest('.email-card').classList.add('sent'); btn.outerHTML='<button class="btn-sent">✓ Envoyé</button>'; }
+function sendAll() { document.querySelectorAll('.btn-send').forEach(btn=>{ btn.closest('.email-card').classList.add('sent'); btn.outerHTML='<button class="btn-sent">✓ Envoyé</button>'; }); }
 function openPreview(club, email) {
   document.getElementById('modal-title').textContent = 'Email → ' + club;
   document.getElementById('modal-to').textContent = email;
-  document.getElementById('modal-body').textContent =
-    'Dear ' + club + ' Recruitment Team,\n\nMy name is Mehdi Ben Moha, a French professional midfielder currently based in Dubai, and I am writing to express my strong interest in joining ' + club + '.\n\nAs a midfielder, I bring technical quality, strong work rate, and a winning mentality. I have attached my CV for your review and would welcome the opportunity to discuss any available positions or trial opportunities.\n\nYours sincerely,\nMehdi Ben Moha\nmehdibenmoha0503@gmail.com';
+  document.getElementById('modal-body').textContent = 'Dear '+club+' Recruitment Team,\n\nMy name is Lucas, a French professional midfielder currently based in Dubai, and I am writing to express my strong interest in joining '+club+'.\n\nAs a midfielder, I bring technical quality, strong work rate, and a winning mentality. I have attached my CV for your review and would welcome the opportunity to discuss any available positions or trial opportunities.\n\nYours sincerely,\nLucas\nlucas@gmail.com';
   document.getElementById('modal').classList.add('open');
 }
-function closeModal(e) {
-  if (e.target.id === 'modal') document.getElementById('modal').classList.remove('open');
-}
+function closeModal(e) { if(e.target.id==='modal') document.getElementById('modal').classList.remove('open'); }
 </script>
 </body>
 </html>
